@@ -24,3 +24,7 @@ build/
 
 # Environment variables
 .env
+
+# OSx
+.DS_Store
+.Trashes

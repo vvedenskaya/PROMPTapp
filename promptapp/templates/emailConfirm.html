@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .message {
+            font-size: 18px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="message" class="message">Wait please...</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            const id = urlParams.get('id');
+            const messageElement = document.getElementById('message');
+
+            if (token) {
+                fetch('https://server.com/verify-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token: token, id: id })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        messageElement.textContent = data.message;
+                        messageElement.classList.add('success');
+                    } else {
+                        messageElement.textContent = data.message;
+                        messageElement.classList.add('error');
+                    }
+                })
+                .catch(error => {
+                    messageElement.textContent = 'Registration error. Try again later';
+                    messageElement.classList.add('error');
+                });
+            } else {
+                messageElement.textContent = 'Link is not valid';
+                messageElement.classList.add('error');
+            }
+        });
+    </script>
+</body>
+</html>
