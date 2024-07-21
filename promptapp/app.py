@@ -1,11 +1,14 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy 
+from flask import Flask, request, render_template
+from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message 
+import random
+import string
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
+def home():
     return "Hello, Promptapp!"
 
 if __name__ == '__main__':
