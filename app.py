@@ -23,8 +23,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenvb('MAIL_PASSWORD')
+app.config['MAIL_USERNAME'] = 'promptgramm.app@gmail.com'
+app.config['MAIL_PASSWORD'] = 'ishe wxdz jzqh vbtz'
 app.config['MAIL_USE_SSL'] = True
 
 db = SQLAlchemy(app)
@@ -78,7 +78,7 @@ def register():
 
         print(f"User {name} registered successfully with ID {new_user.id} and token {new_user.token}")
 
-        msg = Message('Confirm your registration', sender= app.config['MAIL_USERNAME'], recipients=[email])
+        msg = Message('Confirm your registration', sender='promptgramm.app@gmail.com', recipients=[email])
         confirmation_url = url_for('confirm', id=new_user.id, token=token, _external=True)
         msg.body = f"Please click the link to confirm your registration: {confirmation_url}"
         mail.send(msg)
