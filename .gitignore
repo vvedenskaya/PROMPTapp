@@ -28,3 +28,7 @@ build/
 # OSx
 .DS_Store
 .Trashes
+
+
+# Ignore start.sh script
+start.sh
